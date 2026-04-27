@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDAsibiMTWDmNck2qIbGVdzk8FnXLaWb7c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>255007071861</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.focusnflow</string>
+	<key>PROJECT_ID</key>
+	<string>focusnflow-dcdef</string>
+	<key>STORAGE_BUCKET</key>
+	<string>focusnflow-dcdef.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:255007071861:ios:288f7216a4b4e7cc69e23c</string>
+</dict>
+</plist>
