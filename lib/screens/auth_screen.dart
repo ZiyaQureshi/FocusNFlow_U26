@@ -46,88 +46,134 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    nameController.dispose();
+    majorController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Card(
-            elevation: 4,
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    'FocusNFlow',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
+      body: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF00796B),
+              Color(0xFF26A69A),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: Card(
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      'assets/images/logo.png',
+                      height: 110,
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text('Campus Study Organizer'),
-                  const SizedBox(height: 24),
+                    const SizedBox(height: 12),
+                    const Text(
+                      'FocusNFlow',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF00796B),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    const Text(
+                      'Campus Study Organizer',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    const SizedBox(height: 24),
 
-                  if (!isLogin)
+                    if (!isLogin)
+                      TextField(
+                        controller: nameController,
+                        decoration: const InputDecoration(
+                          labelText: 'Full Name',
+                          prefixIcon: Icon(Icons.person),
+                        ),
+                      ),
+
+                    if (!isLogin) const SizedBox(height: 12),
+
+                    if (!isLogin)
+                      TextField(
+                        controller: majorController,
+                        decoration: const InputDecoration(
+                          labelText: 'Major',
+                          prefixIcon: Icon(Icons.school),
+                        ),
+                      ),
+
+                    if (!isLogin) const SizedBox(height: 12),
+
                     TextField(
-                      controller: nameController,
+                      controller: emailController,
                       decoration: const InputDecoration(
-                        labelText: 'Full Name',
-                        border: OutlineInputBorder(),
+                        labelText: 'GSU Email',
+                        prefixIcon: Icon(Icons.email),
                       ),
                     ),
 
-                  if (!isLogin) const SizedBox(height: 12),
+                    const SizedBox(height: 12),
 
-                  if (!isLogin)
                     TextField(
-                      controller: majorController,
+                      controller: passwordController,
+                      obscureText: true,
                       decoration: const InputDecoration(
-                        labelText: 'Major',
-                        border: OutlineInputBorder(),
+                        labelText: 'Password',
+                        prefixIcon: Icon(Icons.lock),
                       ),
                     ),
 
-                  if (!isLogin) const SizedBox(height: 12),
+                    const SizedBox(height: 22),
 
-                  TextField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'GSU Email',
-                      border: OutlineInputBorder(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: loading ? null : submit,
+                        child: loading
+                            ? const SizedBox(
+                                height: 22,
+                                width: 22,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : Text(isLogin ? 'Login' : 'Register'),
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 12),
-
-                  TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Password',
-                      border: OutlineInputBorder(),
+                    TextButton(
+                      onPressed: () {
+                        setState(() => isLogin = !isLogin);
+                      },
+                      child: Text(
+                        isLogin
+                            ? 'Create a new account'
+                            : 'Already have an account? Login',
+                      ),
                     ),
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  ElevatedButton(
-                    onPressed: loading ? null : submit,
-                    child: Text(isLogin ? 'Login' : 'Register'),
-                  ),
-
-                  TextButton(
-                    onPressed: () {
-                      setState(() => isLogin = !isLogin);
-                    },
-                    child: Text(
-                      isLogin
-                          ? 'Create a new account'
-                          : 'Already have an account? Login',
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

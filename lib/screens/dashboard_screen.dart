@@ -28,18 +28,73 @@ class DashboardScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Welcome to FocusNFlow 👋',
-            style: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [
+                  Color(0xFF00796B),
+                  Color(0xFF26A69A),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: Row(
+              children: [
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Welcome back 👋',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Plan smarter, find study spaces, and stay focused.',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Image.asset(
+                  'assets/images/study_planner.png',
+                  height: 95,
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 6),
-          const Text(
-            'Organize tasks, find study rooms, and collaborate with your groups.',
+
+          const SizedBox(height: 24),
+
+          Row(
+            children: [
+              _quickCard(
+                title: 'Planner',
+                image: 'assets/images/study_planner.png',
+              ),
+              const SizedBox(width: 12),
+              _quickCard(
+                title: 'Rooms',
+                image: 'assets/images/study_room.png',
+              ),
+              const SizedBox(width: 12),
+              _quickCard(
+                title: 'Groups',
+                image: 'assets/images/group_study.png',
+              ),
+            ],
           ),
-          const SizedBox(height: 20),
+
+          const SizedBox(height: 24),
 
           _sectionTitle('High Priority Tasks'),
           StreamBuilder<QuerySnapshot>(
@@ -76,7 +131,13 @@ class DashboardScreen extends StatelessWidget {
 
                   return Card(
                     child: ListTile(
-                      leading: const Icon(Icons.task_alt),
+                      leading: const CircleAvatar(
+                        backgroundColor: Color(0xFFE0F2F1),
+                        child: Icon(
+                          Icons.task_alt,
+                          color: Color(0xFF00796B),
+                        ),
+                      ),
                       title: Text(data['title'] ?? 'Task'),
                       subtitle: Text(
                         '${data['course'] ?? 'Course'} • Due ${formatDate(deadline)}\n'
@@ -119,7 +180,13 @@ class DashboardScreen extends StatelessWidget {
 
                   return Card(
                     child: ListTile(
-                      leading: const Icon(Icons.meeting_room),
+                      leading: const CircleAvatar(
+                        backgroundColor: Color(0xFFE0F2F1),
+                        child: Icon(
+                          Icons.meeting_room,
+                          color: Color(0xFF00796B),
+                        ),
+                      ),
                       title: Text(data['name'] ?? 'Study Room'),
                       subtitle: Text(
                         '${data['location'] ?? 'Campus'} • $available seats available',
@@ -158,7 +225,13 @@ class DashboardScreen extends StatelessWidget {
 
                   return Card(
                     child: ListTile(
-                      leading: const Icon(Icons.groups),
+                      leading: const CircleAvatar(
+                        backgroundColor: Color(0xFFE0F2F1),
+                        child: Icon(
+                          Icons.groups,
+                          color: Color(0xFF00796B),
+                        ),
+                      ),
                       title: Text(data['name'] ?? 'Study Group'),
                       subtitle: Text(data['course'] ?? 'Course'),
                     ),
@@ -168,6 +241,41 @@ class DashboardScreen extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _quickCard({
+    required String title,
+    required String image,
+  }) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        height: 120,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x22000000),
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: Image.asset(image),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              title,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }
