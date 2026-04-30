@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:focusnflow/screens/splash_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'firebase_options.dart';
@@ -37,19 +38,19 @@ class FocusNFlowApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(),
         scaffoldBackgroundColor: const Color(0xFFF4F7FB),
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF00796B),
-          primary: const Color(0xFF00796B),
-          secondary: const Color(0xFF26A69A),
+          seedColor: const Color(0xFF0039A6),
+          primary: const Color(0xFF0039A6),
+          secondary: const Color.fromARGB(255, 194, 27, 27),
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF00796B),
+          backgroundColor: Color.fromARGB(255, 0, 34, 121),
           foregroundColor: Colors.white,
           centerTitle: true,
           elevation: 0,
         ),
         cardTheme: CardThemeData(
           elevation: 3,
-          color: Colors.white,
+          color: const Color.fromARGB(255, 255, 255, 255),
           margin: const EdgeInsets.symmetric(vertical: 8),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
@@ -57,7 +58,7 @@ class FocusNFlowApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF00796B),
+            backgroundColor: const Color(0xFF0039A6),
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
