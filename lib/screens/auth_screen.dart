@@ -123,7 +123,6 @@ class _AuthScreenState extends State<AuthScreen>
     return Scaffold(
       body: Column(
         children: [
-          // ── Blue hero ────────────────────────────────────────────────────
           Container(
             height: 220,
             color: const Color(0xFF0039A6),
@@ -153,8 +152,6 @@ class _AuthScreenState extends State<AuthScreen>
                           ),
                         ),
                         const SizedBox(height: 16),
-
-                        // large heading
                         Text(
                           isLogin ? 'Welcome Back' : 'Create Account',
                           style: const TextStyle(
@@ -165,8 +162,6 @@ class _AuthScreenState extends State<AuthScreen>
                           ),
                         ),
                         const SizedBox(height: 6),
-
-                        // subtitle
                         Text(
                           isLogin
                               ? 'Sign in to FocusNFlow'
