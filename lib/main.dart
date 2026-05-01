@@ -16,9 +16,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
@@ -69,20 +67,10 @@ class FocusNFlowApp extends StatelessWidget {
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14),
-          ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
         ),
       ),
-      home: StreamBuilder(
-        stream: AuthService().authStateChanges,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return const HomeScreen();
-          }
-          return const AuthScreen();
-        },
-      ),
+      home: const SplashScreen(),
     );
   }
 }
