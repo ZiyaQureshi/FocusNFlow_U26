@@ -242,6 +242,7 @@ class _AuthScreenState extends State<AuthScreen>
                                 controller: passwordController,
                                 obscureText: obscureLogin,
                                 decoration: InputDecoration(
+                                  hintText: '',
                                   prefixIcon: const Icon(Icons.lock_outline),
                                   suffixIcon: IconButton(
                                     icon: Icon(

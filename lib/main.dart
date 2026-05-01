@@ -70,7 +70,15 @@ class FocusNFlowApp extends StatelessWidget {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
         ),
       ),
-      home: const SplashScreen(),
+      home: StreamBuilder(
+        stream: AuthService().authStateChanges,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return const HomeScreen();
+          }
+          return const SplashScreen();
+        },
+      ),
     );
   }
 }

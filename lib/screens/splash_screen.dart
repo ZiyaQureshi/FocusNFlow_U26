@@ -1,36 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'auth_screen.dart';
-import 'home_screen.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _navigate();
-  }
-
-  Future<void> _navigate() async {
-    await Future.delayed(const Duration(seconds: 3));
-
-    if (!mounted) return;
-
-    final user = FirebaseAuth.instance.currentUser;
-
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (_) => user != null ? const HomeScreen() : const AuthScreen(),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +10,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Stack(
         children: [
           Container(color: const Color(0xFF0039A6)),
+
           Positioned(
             top: 0,
             left: 0,
@@ -49,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/logo_gsu.png', height: 100),
+                    Image.asset('assets/images/logo_only.png', height: 100),
                     const SizedBox(height: 12),
                     const Text(
                       'FocusNFlow',
