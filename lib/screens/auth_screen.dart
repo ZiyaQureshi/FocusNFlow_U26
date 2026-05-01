@@ -489,6 +489,7 @@ class _AuthScreenState extends State<AuthScreen>
                                   setState(() => password = value);
                                 },
                                 decoration: InputDecoration(
+                                  hintText: '',
                                   prefixIcon: const Icon(Icons.lock_outline),
                                   suffixIcon: IconButton(
                                     icon: Icon(
