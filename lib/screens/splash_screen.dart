@@ -1,47 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'auth_screen.dart';
+import 'home_screen.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _navigate();
+  }
+
+  Future<void> _navigate() async {
+    await Future.delayed(const Duration(seconds: 3));
+
+    if (!mounted) return;
+
+    final user = FirebaseAuth.instance.currentUser;
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => user != null ? const HomeScreen() : const AuthScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          Container(color: Color(0xFF0039A6)),
+          Container(color: const Color(0xFF0039A6)),
           Positioned(
             top: 0,
             left: 0,
             right: 0,
-            bottom: MediaQuery.of(context).size.height * 0.48,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/logo_gsu.png',
-                    width: 220,
-                    height: 220,
-                  ),
-                  Text(
-                    'Georgia State University',
-                    style: TextStyle(fontSize: 16, color: Colors.white70),
-                  ),
-                ],
+            bottom: MediaQuery.of(context).size.height * 0.50,
+            child: SafeArea(
+              bottom: false,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/logo_gsu.png', height: 100),
+                    const SizedBox(height: 12),
+                    const Text(
+                      'FocusNFlow',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    const Text(
+                      'Georgia State University',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
+
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               height: MediaQuery.of(context).size.height * 0.50,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
+                padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -52,33 +95,35 @@ class SplashScreen extends StatelessWidget {
                           width: 22,
                           height: 5,
                           decoration: BoxDecoration(
-                            color: Color(0xFF0039A6),
+                            color: const Color(0xFF0039A6),
                             borderRadius: BorderRadius.circular(3),
                           ),
                         ),
-                        SizedBox(width: 6),
+                        const SizedBox(width: 6),
                         Container(
                           width: 5,
                           height: 5,
                           decoration: BoxDecoration(
-                            color: Color(0xFF97CAEB),
+                            color: const Color(0xFF97CAEB),
                             borderRadius: BorderRadius.circular(3),
                           ),
                         ),
-                        SizedBox(width: 6),
+                        const SizedBox(width: 6),
                         Container(
                           width: 5,
                           height: 5,
                           decoration: BoxDecoration(
-                            color: Color(0xFF97CAEB),
+                            color: const Color(0xFF97CAEB),
                             borderRadius: BorderRadius.circular(3),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 28),
-                    Text(
-                      'Study Smarter, \nAchieve More',
+
+                    const SizedBox(height: 28),
+
+                    const Text(
+                      'Study Smarter,\nAchieve More',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 28,
@@ -87,18 +132,21 @@ class SplashScreen extends StatelessWidget {
                         height: 1.25,
                       ),
                     ),
-                    SizedBox(height: 12),
-                    Text(
-                      'Your all-in-one GSU study companion - plan sessions, find rooms, and collaborate with classmates.',
+
+                    const SizedBox(height: 12),
+
+                    const Text(
+                      'Your all-in-one GSU study companion — plan sessions, find rooms, and collaborate with classmates.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 14,
                         color: Color(0xFF888888),
-                        height: 1.5,
+                        height: 1.6,
                       ),
                     ),
-                    SizedBox(height: 32),
+
+                    const Spacer(),
+
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -106,12 +154,12 @@ class SplashScreen extends StatelessWidget {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AuthScreen(),
+                              builder: (_) => const AuthScreen(),
                             ),
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF0039A6),
+                          backgroundColor: const Color(0xFF0039A6),
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
@@ -119,7 +167,7 @@ class SplashScreen extends StatelessWidget {
                           ),
                         ),
                         child: const Text(
-                          'Get Started',
+                          'Get started',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -127,33 +175,38 @@ class SplashScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 12),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => AuthScreen()),
-                        );
-                      },
-                      child: RichText(
-                        text: TextSpan(
-                          text: 'Already have an account? ',
+
+                    const SizedBox(height: 12),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Already have an account? ',
                           style: TextStyle(
                             color: Color(0xFF888888),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 13,
                           ),
-                          children: [
-                            TextSpan(
-                              text: 'Sign in',
-                              style: TextStyle(
-                                color: Color(0xFF0039A6),
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
                         ),
-                      ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const AuthScreen(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'Sign in',
+                            style: TextStyle(
+                              color: Color(0xFF0039A6),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
